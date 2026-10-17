@@ -1,0 +1,53 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# IDE and local editor files
+.idea/
+.vs/
+.vscode/
+*.csproj
+*.sln
+*.sln.DotSettings.user
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# Unity generated metadata and packages
+sysinfo.txt
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Crash reports
+*.stacktrace
+
+# Build outputs
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+*.exe.config
+*.appx
+*.appxbundle
+*.ipa
+*.xcodeproj
+*.xcworkspace
+
