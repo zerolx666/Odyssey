@@ -85,11 +85,11 @@ namespace PLAYERTWO.PlatformerProject
 		/// </summary>
 		protected virtual IEnumerator RestartRoutine()
 		{
-			m_pauser.Pause(false);
+			m_pauser.Pause(false);//意思是取消暂停
 			m_pauser.canPause = false;
-			m_level.player.inputs.enabled = false;
-			yield return new WaitForSeconds(restartFadeOutDelay);
-			GameLoader.instance.Reload();
+			m_level.player.inputs.enabled = false;//禁止玩家的输入
+			yield return new WaitForSeconds(restartFadeOutDelay);//延时
+			GameLoader.instance.Reload();//加载场景
 		}
 
 		/// <summary>
@@ -136,11 +136,11 @@ namespace PLAYERTWO.PlatformerProject
 		}
 
 		/// <summary>
-		/// 重新开始当前关卡，重新加载当前场景。
+		/// UI按钮重开的执行的功能，重新开始当前关卡，重新加载当前场景。
 		/// </summary>
 		public virtual void Restart()
 		{
-			StopAllCoroutines();
+			StopAllCoroutines();//停止所有正在运行的协程，确保之前的任何复活或游戏结束流程都被中断
 			StartCoroutine(RestartRoutine());
 		}
 

@@ -63,7 +63,7 @@ namespace PLAYERTWO.PlatformerProject
 		public virtual void Respawn(bool consumeRetries) => m_respawner.Respawn(consumeRetries);
 
 		/// <summary>
-		/// 重新开始关卡
+		/// 重新开始关卡,挂载按钮的方法
 		/// </summary>
 		public virtual void Restart() => m_respawner.Restart();
 

@@ -8,7 +8,7 @@ namespace PLAYERTWO.PlatformerProject
     public class LevelPauser : Singleton<LevelPauser>
     {
         /// <summary>
-        /// 当关卡被暂停时触发的事件
+        /// 当关卡被暂停时触发的事件，未注册方法
         /// </summary>
         public UnityEvent OnPause;
 
@@ -36,7 +36,7 @@ namespace PLAYERTWO.PlatformerProject
         /// <param name="value">要设置的暂停状态（true = 暂停, false = 取消暂停）</param>
         public virtual void Pause(bool value)
         {
-            // 如果状态没有变化，则不执行
+            // 如果paused状态没有变化，则不执行
             if (paused != value)
             {
                 // 当前是未暂停状态 -> 需要暂停

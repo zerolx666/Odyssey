@@ -51,6 +51,8 @@ namespace PLAYERTWO.PlatformerProject
 
         /// <summary>
         /// 设置 GameObject 的激活状态
+        /// 注意：当你继承 MonoBehaviour 的脚本挂载到某个 GameObject 上时：
+        /// gameObject 属性会自动识别并指向挂载该脚本的GameObject。所以这就是下面gameobject的来源
         /// </summary>
         /// <param name="value">要设置的激活状态</param>
         public virtual void SetActive(bool value) => gameObject.SetActive(value);
