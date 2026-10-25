@@ -48,18 +48,25 @@ namespace PLAYERTWO.PlatformerProject
 		/// </summary>
 		protected virtual IEnumerator RespawnRoutine(bool consumeRetries)
 		{
+			// 根据调用方传入的标记，决定本次复活是否扣除一次重试机会。
 			if (consumeRetries)
 			{
 				m_game.retries--;
 			}
 
+			// 执行玩家自身的复活逻辑，恢复其位置和状态。
 			m_level.player.Respawn();
+			// 清空当前金币计数。
 			m_score.coins = 0;
+			// 重置所有玩家摄像机，使视角与复活后的玩家同步。
 			ResetCameras();
-			OnRespawn?.Invoke();
+			// 通知监听者处理复活后的逻辑；事件为空时不调用。
+			OnRespawn?.Invoke();//无方法
 
+			// 等待配置的淡入延迟，再开始显示复活后的画面。
 			yield return new WaitForSeconds(respawnFadeInDelay);
 
+			// 播放淡入动画，完成后再允许暂停并恢复玩家输入。
 			m_fader.FadeIn(() =>
 			{
 				m_pauser.canPause = true;
@@ -99,18 +106,23 @@ namespace PLAYERTWO.PlatformerProject
 		/// </summary>
 		protected virtual IEnumerator Routine(bool consumeRetries)
 		{
+			// 先解除暂停，确保后续协程中的等待和过渡动画能够正常进行。
 			m_pauser.Pause(false);
+			// 过渡期间禁止再次暂停，并禁用玩家输入，避免操作干扰复活流程。
 			m_pauser.canPause = false;
 			m_level.player.inputs.enabled = false;
-
+			// 本次复活需要消耗重试次数且已无剩余次数时，进入游戏结束流程。
 			if (consumeRetries && m_game.retries == 0)
 			{
 				StartCoroutine(GameOverRoutine());
+				// 结束当前协程，不再执行下面的淡出和复活逻辑。
 				yield break;
 			}
 
+			// 等待配置的复活淡出延迟，再开始画面过渡。
 			yield return new WaitForSeconds(respawnFadeOutDelay);
-
+			
+			// 淡出完成后启动复活协程，并传入是否消耗重试次数的标记。
 			m_fader.FadeOut(() => StartCoroutine(RespawnRoutine(consumeRetries)));
 		}
 
@@ -129,10 +141,10 @@ namespace PLAYERTWO.PlatformerProject
 		/// 根据重试次数调用复活流程或游戏结束流程。
 		/// 参数 consumeRetries 指示是否扣除重试次数。
 		/// </summary>
-		public virtual void Respawn(bool consumeRetries)
+		public virtual void Respawn(bool consumeRetries)//true
 		{
 			StopAllCoroutines();
-			StartCoroutine(Routine(consumeRetries));
+			StartCoroutine(Routine(consumeRetries));//consumeRetries=true
 		}
 
 		/// <summary>

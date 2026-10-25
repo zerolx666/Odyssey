@@ -204,13 +204,31 @@ namespace PLAYERTWO.PlatformerProject
 
 		protected virtual void Update()
 		{
+			// 检查角色控制器是否启用，或者自定义碰撞器是否存在
 			if (controller.enabled || m_collider != null)
 			{
-				HandleStates();//调用states文件夹下的每个状态下的onstep函数
+				// 处理状态机逻辑：调用当前状态的 Step() 方法
+				// 驱动所有状态的帧更新（如移动、跳跃、冲刺等状态的具体逻辑）
+				HandleStates();
+
+				// 处理角色移动：使用 CharacterController 或自定义 Transform 移动
+				// 将速度向量乘以时间增量，应用到角色位置
 				HandleController();
+
+				// 处理轨道（Spline）系统：检测是否在轨道上，并处理进出轨道逻辑
+				// 使用球体投射检测轨道碰撞体，决定是否进入/离开轨道模式
 				HandleSpline();
+
+				// 处理地面检测：更新角色的接地状态和地面信息
+				// 判断是否接地、更新地面法线/坡度、处理落地和离地事件
 				HandleGround();
+
+				// 处理接触碰撞：检测与其他物体的重叠并触发接触回调
+				// 调用 OnContact 回调，并通知接触对象的 IEntityContact 接口
 				HandleContacts();
+
+				// 子类特殊处理（空实现，由子类重写以实现自定义逻辑）
+				// 用于派生类在每帧执行其他必要的更新
 				OnUpdate();
 			}
 		}

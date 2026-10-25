@@ -146,7 +146,7 @@ namespace PLAYERTWO.PlatformerProject
 				if (health.isEmpty)
 				{
 					Throw(); // 丢掉物品
-					playerEvents.OnDie?.Invoke(); // 触发死亡事件
+					playerEvents.OnDie?.Invoke(); // 触发死亡事件,但没注册
 				}
 			}
 		}
